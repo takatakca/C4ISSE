@@ -8,8 +8,9 @@
 - [ ] **Permissions** à demander : Orders R/W · Inventory R · Payments W (flux) · Customers R/W · Employees R · Merchant R (justifications dans `docs/listing/` quand un package existe).
 - [ ] **OAuth** : régler l'URL de redirection à `{APP_BASE_URL}/api/clover/connect/callback`.
 - [ ] **Webhooks** : régler l'URL à `{APP_BASE_URL}/api/clover/webhooks`, abonner les événements : O, P, I, A ; coller le `verificationCode` reçu au premier POST ; noter le code d'auth du webhook → variable `CLOVER_WEBHOOK_AUTH` (coffre/serveur, jamais ici).
-- [ ] **Facturation App Market** : créer les 3 plans d'abonnement — **Base 50 $/mois · Premium 100 $/mois · VIP 150 $/mois** (CAD) et y associer les fonctionnalités du README.
+- [ ] **Facturation App Market** : créer les 3 plans d'abonnement — **Base 50 $/mois · Premium 100 $/mois · VIP 150 $/mois** (CAD) et y associer les fonctionnalités du README. Les 3 plans couvrent aussi le module caisse-photo (Premium/VIP) — aucun plan séparé « Picture Register ».
 - [ ] **Fiche marketplace** : téléverser description FR/EN + légaux depuis `docs/listing/` ; icône, couverture et captures (voir la liste de contrôle du package ; couvertures premium dans `~/workspace/clover-apps/assets-premium/` quand elles existent) ; vidéo de démo à tourner depuis le prototype.
+- [ ] **Picture Register (`J0H36VTJBSBBP`) : NE PAS soumettre comme app distincte** — c'est le module caisse-photo de C4ISSE (correction de Matt, 2026-10-28 18:30 ; voir `docs/modules/picture-register.md`). Le brouillon portail reste en place, aucune suppression ; aucune permission, aucun plan de facturation, aucune fiche séparés pour lui. Ses fonctions se règlent ici, dans l'app C4ISSE.
 
 ## 2. Variables d'environnement (serveur de l'app — noms seulement)
 
