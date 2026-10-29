@@ -1,4 +1,5 @@
 {
+  "key": "c4isse",
   "name": "C4ISSE by TAKATAK",
   "cloverAppId": "VDV7XAH5TPB78",
   "developerId": "9KJ25ATT15TTW",
@@ -32,5 +33,7 @@
     "CLOVER_API_BASE",
     "APP_BASE_URL",
     "DATABASE_URL"
-  ]
+  ],
+  "summaryFr": "Couche caisse TAKATAK à côté du Register Clover : vente rapide au comptoir sur le vrai menu, tiroir-caisse et fermeture de journée, photos d’articles (module Picture Register).",
+  "summaryEn": "TAKATAK register layer next to the Clover Register: fast counter sales on the real menu, cash drawer and end-of-day close, item photos (Picture Register module)."
 }
