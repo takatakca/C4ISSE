@@ -39,3 +39,33 @@ Orders R/W · Inventory R · Payments W (flux) · Customers R/W · Employees R �
 ## Le système unique TAKATAK
 
 Cette application fait partie de la suite TAKATAK sur Clover : toutes les apps partagent le même dos d'événements (webhooks Clover), le même **client unique reconnu par son numéro de téléphone** (+ courriel), et les mêmes commandes et paiements Clover. Aucune app ne vit en silo : les données qu'elle produit alimentent les autres apps de la suite (voir « Clover API — Main Stuff — Robot Notepad », section 3, déposé au Drive Opérations et dans `~/workspace/clover-apps/`).
+
+## État du code (2026-10-28)
+
+Application Next.js 16 qui fonctionne (tests verts, build OK). Mise en ligne : `DEPLOY.md` § 5.
+
+**Ce qui marche :**
+- **Commun (kit Suite TAKATAK, identique dans les 9 apps)** : connexion Clover OAuth v2 (jetons scellés, rafraîchis
+  seuls, supprimés à la désinstallation) · webhook Clover (vérification, X-Clover-Auth, chaque événement une fois) ·
+  base PostgreSQL (ou mémoire en dev) · session marchand · paliers Base / Premium / VIP lus depuis la facturation
+  Clover (`OWN_MERCHANTS` = VIP) · marchand `RNVTBYMCKXEJ1` en lecture seule · lien Suite TAKATAK avec Food Hub ·
+  page d'accueil FR/EN, tableau de bord `/app`, pages légales `/legal/*`, `/api/health`, `/api/cron`, clés d'appareils.
+- **Tableau de bord premium (2026-10-29, kit commun)** : menu latéral avec sous-menus (les écrans de cette app,
+  Suite TAKATAK, Mon compte, Aide) · Mon compte → Profil, Forfait et facturation, Actions autorisées, Appareils,
+  Paiements et dépôts, Sécurité et données (export JSON), Journal d'activité · rôle Clover de la personne (propriétaire,
+  administrateur, gérant, employé) vérifié par le serveur pour chaque action sensible, et noté au journal · sélecteur
+  des 9 apps de la suite (annuaire Food Hub) · version mobile. Comment tout s'emboîte : `docs/SUITE_KIT.md`.
+- Menu Clover réel pour l'écran de vente (`GET /api/register/menu`, photos pour Premium/VIP)
+- Commande créée dans Clover depuis le panier, vérifiée contre le menu (`POST /api/register/orders`) — l'appareil
+  prend ensuite le paiement avec la Payments API Clover
+- Rapport du jour depuis les paiements Clover : modes de paiement, comptant, pourboires, taxes, remboursements (Base)
+- Tiroir-caisse : fonds, attendu calculé depuis le comptant Clover, compté, écart (VIP)
+- Module caisse-photo (Picture Register) : photo par article (Premium)
+
+**Ce qui reste :**
+- **L'application Android de comptoir** (SDK Clover, connecteurs, Payments API, tiroir, impression) : elle appelle
+  les API ci-dessus avec une clé d'appareil. À bâtir dans Android Studio (hors de ce conteneur).
+- Recherche client par téléphone, rabais/frais (Premium), contrôle gérant NIP (VIP).
+
+**Développer :** `npm install` · `npm run dev` · `npm run typecheck` · `npm test` · `npm run build`. Règles pour
+les agents : `AGENTS.md` ; journal : `WORKLOG.md`.
