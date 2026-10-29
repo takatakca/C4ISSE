@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 // GET ?date=YYYY-MM-DD (default today, Montréal time): the day's report from Clover payments.
 export async function GET(req: Request) {
-  const c = await requireMerchantOrDevice(req);
+  const c = await requireMerchantOrDevice(req, 'base', { action: 'register.report' });
   if (!isCtx(c)) return c;
   const date = new URL(req.url).searchParams.get('date') ?? localDate();
   if (!isDate(date)) return fail('date must be YYYY-MM-DD');

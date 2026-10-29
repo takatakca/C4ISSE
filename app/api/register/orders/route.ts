@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 // { lines: [{ itemId, quantity, modifierIds?, note? }], note? } → checked against the live Clover menu → Clover order.
 // The device then takes the payment on that order with Clover's Payments API.
 export async function POST(req: Request) {
-  const c = await requireMerchantOrDevice(req);
+  const c = await requireMerchantOrDevice(req, 'base', { action: 'register.sell' });
   if (!isCtx(c)) return c;
   const b = await readJson(req);
   if (!b || !Array.isArray(b.lines)) return fail('{ lines: [...] } required');

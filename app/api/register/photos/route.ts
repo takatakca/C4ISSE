@@ -12,7 +12,7 @@ export async function GET(req: Request) {
 }
 
 export async function PUT(req: Request) {
-  const c = await requireMerchant(req, 'premium');
+  const c = await requireMerchant(req, 'premium', { action: 'register.photos' });
   if (!isCtx(c)) return c;
   const b = await readJson(req);
   if (!b) return fail('JSON body required');
